@@ -67,9 +67,12 @@ class TokenAuthentication
 	        if($auth_request === false){
 		        return $this->error($request, $response);
 	        }
+
 	        if($auth_request instanceof Request){
 		        return $next($auth_request, $response);
 	        }
+
+	        return $next($request, $response);
 
         } catch (UnauthorizedExceptionInterface $e) {
             $this->setResponseMessage($e->getMessage());
